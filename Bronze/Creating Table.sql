@@ -1,3 +1,12 @@
+USE DW1;
+GO
+
+IF OBJECT_ID('bronze.crm_cust_info', 'U') IS NOT NULL
+BEGIN
+    DROP TABLE bronze.crm_cust_info;
+END
+GO
+
 CREATE TABLE bronze.crm_cust_info (
     cst_id              INT,
     cst_key             NVARCHAR(50),
@@ -7,9 +16,22 @@ CREATE TABLE bronze.crm_cust_info (
     cst_gndr            NVARCHAR(50),
     cst_create_date     DATE
 );
+GO
+SELECT * FROM bronze.crm_cust_info
 
+BULK INSERT bronze.crm_cust_info
+from "C:\Users\mahes\OneDrive\Desktop\White Scholars\SQL\datasets\source_crm\cust_info.csv"
+WITH (
+  FIRSTROW = 2,
+  FIELDTERMINATOR = ',',
+  TABLOCK
+);
 
-
+IF OBJECT_ID('bronze.crm_prd_info', 'U') IS NOT NULL
+BEGIN
+    DROP TABLE bronze.crm_prd_info;
+END
+GO
 CREATE TABLE bronze.crm_prd_info (
     prd_id       INT,
     prd_key      NVARCHAR(50),
@@ -19,7 +41,14 @@ CREATE TABLE bronze.crm_prd_info (
     prd_start_dt DATETIME,
     prd_end_dt   DATETIME
 );
-
+BULK INSERT bronze.crm_prd_info
+from "C:\Users\mahes\OneDrive\Desktop\White Scholars\SQL\datasets\source_crm\prd_info.csv"
+WITH (
+  FIRSTROW = 2,
+  FIELDTERMINATOR = ',',
+  TABLOCK
+);
+use dw1;
 
 CREATE TABLE bronze.crm_sales_details (
     sls_ord_num  NVARCHAR(50),
@@ -33,6 +62,15 @@ CREATE TABLE bronze.crm_sales_details (
     sls_price    INT
 );
 
+BULK INSERT bronze.crm_sales_details
+from "C:\Users\mahes\OneDrive\Desktop\White Scholars\SQL\datasets\source_crm\sales_details.csv"
+WITH (
+  FIRSTROW = 2,
+  FIELDTERMINATOR = ',',
+  TABLOCK
+);
+select * from bronze.crm_sales_details
+select * from bronze.crm_prd_info
 
 CREATE TABLE bronze.erp_loc_a101 (
     cid    NVARCHAR(50),
@@ -54,52 +92,26 @@ CREATE TABLE bronze.erp_px_cat_g1v2 (
     subcat       NVARCHAR(50),
     maintenance  NVARCHAR(50)
 );
-
-BULK INSERT bronze.crm_cust_info
-from 'C:\Users\mahes\OneDrive\Desktop\White Scholars\SQL\datasets\source_crm\cust_info'
-WITH (
-  FIRSTROW = 2,
-  FIELDTERMINATOR = ','
-  TABLOCK
-);
-
-BULK INSERT bronze.crm_prd_info
-from 'C:\Users\mahes\OneDrive\Desktop\White Scholars\SQL\datasets\source_crm\prd_info'
-WITH (
-  FIRSTROW = 2,
-  FIELDTERMINATOR = ','
-  TABLOCK
-);
-
-BULK INSERT bronze.crm_sales_details
-from 'C:\Users\mahes\OneDrive\Desktop\White Scholars\SQL\datasets\source_crm\sales_details'
-WITH (
-  FIRSTROW = 2,
-  FIELDTERMINATOR = ','
-  TABLOCK
-);
-
 BULK INSERT bronze.erp_loc_a101 
-from '"C:\Users\mahes\OneDrive\Desktop\White Scholars\SQL\datasets\source_erp\LOC_A101.csv"'
+from "C:\Users\mahes\OneDrive\Desktop\White Scholars\SQL\datasets\source_erp\LOC_A101.csv"
 WITH (
   FIRSTROW = 2,
-  FIELDTERMINATOR = ','
+  FIELDTERMINATOR = ',',
   TABLOCK
 );
 
 BULK INSERT bronze.erp_px_cat_g1v2 
-from '"C:\Users\mahes\OneDrive\Desktop\White Scholars\SQL\datasets\source_erp\PX_CAT_G1V2 "'
+from "C:\Users\mahes\OneDrive\Desktop\White Scholars\SQL\datasets\source_erp\PX_CAT_G1V2.csv" 
 WITH (
   FIRSTROW = 2,
-  FIELDTERMINATOR = ','
+  FIELDTERMINATOR = ',',
   TABLOCK
 );
 
 BULK INSERT bronze.erp_cust_az12
-from '"C:\Users\mahes\OneDrive\Desktop\White Scholars\SQL\datasets\source_erp\CUST_AZ12"'
+from "C:\Users\mahes\OneDrive\Desktop\White Scholars\SQL\datasets\source_erp\CUST_AZ12.csv"
 WITH (
   FIRSTROW = 2,
-  FIELDTERMINATOR = ','
+  FIELDTERMINATOR = ',',
   TABLOCK
 );
-
