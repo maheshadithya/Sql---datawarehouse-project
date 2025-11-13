@@ -1,3 +1,5 @@
+CREATE SCHEMA silver;
+GO
 
 CREATE TABLE silver.crm_cust_info (
     cst_id              INT,
@@ -8,10 +10,6 @@ CREATE TABLE silver.crm_cust_info (
     cst_gndr            NVARCHAR(50),
     cst_create_date     DATE
 );
-
-
-
-
 CREATE TABLE silver.crm_prd_info (
     prd_id          INT,
     cat_id          NVARCHAR(50),
@@ -23,7 +21,6 @@ CREATE TABLE silver.crm_prd_info (
     prd_end_dt      DATE,
     dwh_create_date DATETIME2 DEFAULT GETDATE()
 );
-
 
 CREATE TABLE silver.crm_sales_details (
     sls_ord_num  NVARCHAR(50),
