@@ -63,7 +63,7 @@ WITH (
   TABLOCK
 );
 
-BULK INSERT bronze.crm_cust_info
+BULK INSERT bronze.crm_prd_info
 from 'C:\Users\mahes\OneDrive\Desktop\White Scholars\SQL\datasets\source_crm\prd_info'
 WITH (
   FIRSTROW = 2,
@@ -71,7 +71,7 @@ WITH (
   TABLOCK
 );
 
-BULK INSERT bronze.crm_cust_info
+BULK INSERT bronze.crm_sales_details
 from 'C:\Users\mahes\OneDrive\Desktop\White Scholars\SQL\datasets\source_crm\sales_details'
 WITH (
   FIRSTROW = 2,
